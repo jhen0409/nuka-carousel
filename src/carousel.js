@@ -45,6 +45,7 @@ const Carousel = React.createClass({
     data: React.PropTypes.func,
     decorators: React.PropTypes.array,
     dragging: React.PropTypes.bool,
+    touching: React.PropTypes.bool,
     easing: React.PropTypes.string,
     edgeEasing: React.PropTypes.string,
     framePadding: React.PropTypes.string,
@@ -68,6 +69,7 @@ const Carousel = React.createClass({
       data: function() {},
       decorators: decorators,
       dragging: true,
+      touching: true,
       easing: 'easeOutCirc',
       edgeEasing: 'easeOutElastic',
       framePadding: '0px',
@@ -84,6 +86,7 @@ const Carousel = React.createClass({
     return {
       currentSlide: 0,
       dragging: false,
+      touching: false,
       frameWidth: 0,
       left: 0,
       top: 0,
@@ -150,6 +153,10 @@ const Carousel = React.createClass({
 
   getTouchEvents() {
     var self = this;
+
+    if (this.props.touching === false) {
+      return null;
+    }
 
     return {
       onTouchStart(e) {
