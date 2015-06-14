@@ -127,12 +127,14 @@ const Carousel = React.createClass({
         </div>
         {this.props.decorators ?
           this.props.decorators.map(function(Decorator, index) {
+            if (!Decorator.props) Decorator.props = {};
             return (
               <div
                 style={assign(self.getDecoratorStyles(Decorator.position), Decorator.style || {})}
                 className={'slider-decorator-' + index}
                 key={index}>
                 <Decorator.component
+                  {...Decorator.props}
                   currentSlide={self.state.currentSlide}
                   slideCount={self.state.slideCount}
                   slidesToShow={self.props.slidesToShow}
