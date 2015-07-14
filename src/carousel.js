@@ -540,19 +540,19 @@ const Carousel = React.createClass({
   getListStyles() {
     var listWidth = this.state.slideWidth * this.props.children.length;
     var spacingOffset = this.props.cellSpacing * this.props.children.length;
+    var left = this.getTweeningValue('left');
+    var top = this.getTweeningValue('top');
     return {
       position: 'relative',
       display: 'block',
-      top: this.getTweeningValue('top'),
-      left: this.getTweeningValue('left'),
       margin: this.props.vertical ? (this.props.cellSpacing / 2) * -1 + 'px 0px'
                                   : '0px ' + (this.props.cellSpacing / 2) * -1 + 'px',
       padding: 0,
       height: this.props.vertical ? listWidth + spacingOffset : 'auto',
       width: this.props.vertical ? 'auto' : listWidth + spacingOffset,
       cursor: this.state.dragging === true ? 'pointer' : 'inherit',
-      transform: 'translate3d(0, 0, 0)',
-      WebkitTransform: 'translate3d(0, 0, 0)',
+      transform: `translate3d(${left}px, ${top}px, 0)`,
+      WebkitTransform: `translate3d(${left}px, ${top}px, 0)`,
       boxSizing: 'border-box',
       MozBoxSizing: 'border-box'
     }
